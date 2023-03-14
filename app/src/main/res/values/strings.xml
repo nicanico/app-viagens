@@ -1,11 +1,25 @@
 <resources>
-    <string name="app_name">activity-login</string>
+    <string name="app_name">Viagens</string>
     <string name="login">Login</string>
     <string name="sign_in">Please sign in to continue.</string>
     <string name="input_email">E-mail</string>
     <string name="input_password">Password</string>
     <string name="button_sign">SIGN IN</string>
-    <string name="account">Don’t have an account?</string>
+    <string name="account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
     <string name="title_activity_sing_up">singUpActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="sing_up">Sign Up</string>
+    <string name="sing_up_create">Create a new account</string>
+    <string name="username">Username</string>
+    <string name="phone">Phone</string>
+    <string name="check_over">Over 18?</string>
+    <string name="button_create">CREATE ACCOUNT</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="sing_in">Sign in</string>
+
+
+
+
+
 </resources>
