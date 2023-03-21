@@ -57,7 +57,11 @@ fun Home() {
 
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(
+                                top = 13.dp,
+                                end = 19.dp
+                            ),
                         horizontalAlignment = Alignment.End
                     ) {
                         Card(
@@ -77,13 +81,15 @@ fun Home() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
-                        .padding(start = 10.dp)
+                        .padding(start = 36.dp)
 
             )
                 {
-                    Row(
-                        modifier = Modifier.fillMaxHeight()
-                    ) {
+                    Row( modifier = Modifier
+
+                        .padding(end = 30.dp)
+                    )
+                    {
                         Icon(
                             painter = painterResource(id = R.drawable.location),
                             contentDescription = "",
