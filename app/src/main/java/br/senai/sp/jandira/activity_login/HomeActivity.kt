@@ -5,18 +5,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import br.senai.sp.jandira.activity_login.ui.theme.ActivityloginTheme
+import java.time.format.TextStyle
 
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,34 +54,70 @@ fun Home() {
 
                 Column(
                     modifier = Modifier.fillMaxWidth()
+
                 ) {
-                    Text(text = "Susanna Hoffs")
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.End
+                    ) {
+                        Card(
+                            modifier = Modifier.size(61.dp),
+                            shape = CircleShape,
+
+                        ) {
+                            Image(painter = painterResource(id = R.drawable.susanna_hoffs), contentDescription = "")
+                        }
+                        Text(
+                            text = "Susanna Hoffs",
+                            color = Color.White
+                        )
+                    }
 
                 Column(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(start = 10.dp)
+
             )
                 {
-                    Row() {
+                    Row(
+                        modifier = Modifier.fillMaxHeight()
+                    ) {
                         Icon(
                             painter = painterResource(id = R.drawable.location),
                             contentDescription = "",
-                        tint = Color.White
+                            tint = Color.White
                         )
                         Text(
                             text = "You're in Paris",
-                            color = Color.White)
+                            color = Color.White
+                        )
                     }
 
-                    Text(text = "My Trips")
+                    Text(
+                        text = "My Trips",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp,
+                        color = Color.White
+                    )
+
                 }
 
             }
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(top = 210.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 210.dp),
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "sd,jkhvfdslkfhu")
-                    Text(text = "sd,uadfhlkaushflkasufhfuhs")
+                    Text(
+                        text = "Categorias",
+
+                    )
+
+
+
                 }
         }
 
