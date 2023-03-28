@@ -20,6 +20,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.activity_login.components.BottomShape
+import br.senai.sp.jandira.activity_login.components.TopShape
 import br.senai.sp.jandira.activity_login.ui.theme.ActivityloginTheme
 
 class MainActivity : ComponentActivity() {
@@ -62,16 +64,7 @@ fun Telalogin() {
                 horizontalArrangement = Arrangement.End
 
             ) {
-                Surface(
-                    modifier = Modifier
-                        .height(40.dp)
-                        .width(120.dp),
-                    color = Color(207, 6, 240),
-                    shape = RoundedCornerShape(
-                        bottomStart = 32.dp
-                    )
-                    ) {
-                }
+                TopShape()
             }
                 // form
             Column(
@@ -202,16 +195,8 @@ fun Telalogin() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
             ) {
-                Surface(
-                    modifier = Modifier
-                        .height(40.dp)
-                        .width(120.dp),
-                    color = Color(207, 6, 240),
-                    shape = RoundedCornerShape(
-                        topEnd = 32.dp
-                    ),
-                ) {
-                }
+
+                BottomShape()
             }
 
 

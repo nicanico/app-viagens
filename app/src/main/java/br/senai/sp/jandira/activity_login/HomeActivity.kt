@@ -45,7 +45,8 @@ fun Home() {
             Box(
             modifier = Modifier
                 .fillMaxSize()
-                .height(300.dp))
+                .height(300.dp),
+            )
             {
                 Image(
                     painter = painterResource(id = R.drawable.paris),
@@ -57,7 +58,8 @@ fun Home() {
 
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
                             .padding(
                                 top = 13.dp,
                                 end = 19.dp
@@ -69,7 +71,9 @@ fun Home() {
                             shape = CircleShape,
 
                         ) {
-                            Image(painter = painterResource(id = R.drawable.susanna_hoffs), contentDescription = "")
+                            Image(
+                                painter = painterResource(id = R.drawable.susanna_hoffs),
+                                contentDescription = "")
                         }
                         Text(
                             text = "Susanna Hoffs",
@@ -79,15 +83,15 @@ fun Home() {
 
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight()
+                        .fillMaxSize()
+
                         .padding(start = 36.dp)
 
             )
                 {
                     Row( modifier = Modifier
-
-                        .padding(end = 30.dp)
+                        .fillMaxWidth()
+                        .padding(end = 30.dp, top = 25.dp)
                     )
                     {
                         Icon(
