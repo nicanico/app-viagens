@@ -356,8 +356,8 @@ fun userSave(
     var user = userRepository.findUserByEmail(email)
     Log.i("DS2T", "$user")
 
-    // se user for null, gravamos o novo usuario, senão
-    // avisamos que o usuario já existe
+    // se user for null, gravamos o novo usuario,
+    // senão avisamos que o usuario já existe
 
     if(user == null){
         val newUser = User(
