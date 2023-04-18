@@ -1,11 +1,14 @@
 package br.senai.sp.jandira.activity_login
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.*
 // import androidx.compose.foundation.gestures.ModifierLocalScrollableContainerProvider.value
 import androidx.compose.foundation.gestures.scrollable
@@ -23,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -38,6 +42,8 @@ import br.senai.sp.jandira.activity_login.components.TopShape
 import br.senai.sp.jandira.activity_login.model.User
 import br.senai.sp.jandira.activity_login.repository.UserRepository
 import br.senai.sp.jandira.activity_login.ui.theme.ActivityloginTheme
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 
 class singUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +80,29 @@ fun singUp(name: String) {
     }
 
     var context = LocalContext.current
+
+    // Obter foto da galeira de imagens
+    // tipamos nossa mutableStateOf no tipo uri
+    var photoUri by remember{
+        mutableStateOf<Uri?>(null)
+    }
+
+    // Criar o objeto que abrirá a galeria e retornará
+    // a Uri da imagem selecionada
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ){
+        photoUri = it
+    }
+
+    // passamos a uri, ele busca e reconstroi a imagem
+    var painter = rememberAsyncImagePainter(
+        ImageRequest.Builder(LocalContext.current).data(photoUri).build()
+    )
+
+
+
+
 
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -137,12 +166,13 @@ fun singUp(name: String) {
                                     colors = listOf(Color.Magenta, Color.Transparent))),
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.profile),
+                                painter = painter,
                                 contentDescription = "",
                                 modifier = Modifier
                                     .align(Alignment.BottomEnd)
                                     .size(16.dp)
-                                    .padding(4.dp)
+                                    .padding(4.dp),
+                                contentScale = ContentScale.Crop
 
 
                             )
@@ -153,7 +183,10 @@ fun singUp(name: String) {
                             modifier = Modifier
                                 .align(Alignment.BottomEnd)
                                 .offset(x = 0.dp, y = (5).dp)
-                                .size(28.dp),
+                                .size(28.dp)
+                                .clickable {
+                                           launcher.launch("image/*")
+                                },
                             colorFilter = ColorFilter.tint(Color(207, 6, 240))
 
                         )
