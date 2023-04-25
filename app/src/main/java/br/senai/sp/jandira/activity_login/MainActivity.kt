@@ -52,7 +52,6 @@ fun Telalogin() {
 
     val context = LocalContext.current
 
-    // não esquecer do .value
     var emailState by remember {
         mutableStateOf("")
     }

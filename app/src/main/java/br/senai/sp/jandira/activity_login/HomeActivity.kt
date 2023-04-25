@@ -5,22 +5,27 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.activity_login.model.Category
+import br.senai.sp.jandira.activity_login.repository.CategoryRepository
 import br.senai.sp.jandira.activity_login.ui.theme.ActivityloginTheme
-import java.time.format.TextStyle
 
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,115 +33,93 @@ class HomeActivity : ComponentActivity() {
         setContent {
             ActivityloginTheme {
                 // A surface container using the 'background' color from the theme
-                Home()
+
+                HomeScreen(CategoryRepository.getCategories())
+
             }
         }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun Home() {
+fun HomeScreen(categories: List<Category>) {
 
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-
-            Box(
+    Scaffold( floatingActionButton = {
+        FloatingActionButton(
+            onClick = { /*TODO*/ },
+            backgroundColor = Color(207, 6, 240)
+        ) {
+            Icon(imageVector = Icons.Default.Add,
+                    contentDescription = " ",
+                tint =  Color.White
+            )
+        }
+    } ) {
+        Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .height(300.dp),
-            )
-            {
-                Image(
-                    painter = painterResource(id = R.drawable.paris),
-                    contentDescription = ""
+                .padding(it)
+        ) {
+            Column() {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    backgroundColor = Color.Magenta,
+                    shape = RectangleShape
+
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.paris),
+                        contentDescription = "Logo com foto de paris",
+                        contentScale = ContentScale.Crop
+                    )
+                }
+
+                Text(
+                    text = stringResource(id = R.string.category),
+                    modifier = Modifier.padding(top = 14.dp, start = 14.dp),
+                    color = Color.Gray
                 )
 
-                Column(
-                    modifier = Modifier.fillMaxWidth()
-
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = 13.dp,
-                                end = 19.dp
-                            ),
-                        horizontalAlignment = Alignment.End
-                    ) {
+                LazyRow() {
+                    items(categories) {
                         Card(
-                            modifier = Modifier.size(61.dp),
-                            shape = CircleShape,
+                            modifier = Modifier
+                                .size(200.dp, 80.dp)
+                                .padding(4.dp),
+                            backgroundColor = Color(207, 6, 240)
+                        )
+                        {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Icon(
+                                    // double bang - referente a arma de desenho com bang bang !!
+                                    painter = it.icon!!,
+                                    contentDescription = " ")
+                                Text(text = it.name)
+                            }
 
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.susanna_hoffs),
-                                contentDescription = "")
                         }
-                        Text(
-                            text = "Susanna Hoffs",
-                            color = Color.White
-                        )
                     }
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-
-                        .padding(start = 19.dp)
-
-            )
-                {
-                    Row( modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(end = 30.dp, top = 25.dp)
-                    )
-                    {
-                        Icon(
-                            painter = painterResource(id = R.drawable.location),
-                            contentDescription = "",
-                            tint = Color.White
-                        )
-                        Text(
-                            text = "You're in Paris",
-                            color = Color.White
-                        )
-                    }
-
-                    Text(
-                        text = "My Trips",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp,
-                        color = Color.White
-                    )
 
                 }
-
             }
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 210.dp, start = 19.dp),
-                    verticalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Categorias",
-                        color = Color.Gray
-
-                    )
-
-
-
-                }
         }
-
-
-
     }
 
 
+}
+
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun Preview(){
+    ActivityloginTheme {
+        // A surface container using the 'background' color from the theme
+        HomeScreen(CategoryRepository.getCategories())
+
+    }
 }
